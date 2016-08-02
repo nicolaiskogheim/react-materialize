@@ -35,8 +35,10 @@ class Pagination extends React.Component {
     let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
     let startPage = Math.max(hiddenPagesBefore, 1);
     let endPage = Math.min(items, startPage + maxButtons - 1);
+    let prevPage = Math.max(0, activePage - 1);
+    let nextPage = Math.min(endPage, activePage + 1);
     buttons.push(
-      <PaginationButton key={0} disabled={startPage == 1} onSelect={this._onClick(activePage - 1)}>
+      <PaginationButton key={0} disabled={startPage == 1} onSelect={this._onClick(prevPage)}>
         <Icon>chevron_left</Icon>
       </PaginationButton>
     );
@@ -48,7 +50,7 @@ class Pagination extends React.Component {
       );
     }
     buttons.push(
-      <PaginationButton key={items + 1} disabled={endPage == items} onSelect={this._onClick(activePage + 1)}>
+      <PaginationButton key={items + 1} disabled={endPage == items} onSelect={this._onClick(nextPage)}>
         <Icon>chevron_right</Icon>
       </PaginationButton>
     );
